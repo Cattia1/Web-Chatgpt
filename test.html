@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>调用ChatGPT API</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+
+<h2>ChatGPT API 调用示例</h2>
+
+<div>
+  <label for="user_input">输入：</label>
+  <input type="text" id="user_input">
+  <button onclick="getResponse()">获取回复</button>
+</div>
+
+<div id="response">
+  <!-- 这里会显示响应 -->
+</div>
+
+<script>
+function getResponse() {
+  var userInput = document.getElementById('user_input').value;
+  var apiUrl = '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'; // 将此替换为您的API端点
+
+  $.ajax({
+    url: apiUrl,
+    method: 'POST',
+    contentType: 'application/json',
+    data: JSON.stringify({ input: userInput }),
+    success: function(response) {
+      document.getElementById('response').innerText = response.output;
+    },
+    error: function(xhr, status, error) {
+      console.error('Error:', error);
+    }
+  });
+}
+</script>
+
+</body>
+</html>
